@@ -12,10 +12,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="src\app\api\" />
+    <Folder Include="src\app\common\modals\" />
     <Folder Include="src\app\common\options\" />
     <Folder Include="src\features\activities\dashboard\" />
     <Folder Include="src\features\activities\details\" />
     <Folder Include="src\features\activities\form\" />
     <Folder Include="src\features\home\" />
+    <Folder Include="src\features\users\" />
   </ItemGroup>
 </Project>
