@@ -18,6 +18,7 @@
     <Folder Include="src\features\activities\details\" />
     <Folder Include="src\features\activities\form\" />
     <Folder Include="src\features\home\" />
+    <Folder Include="src\features\profiles\" />
     <Folder Include="src\features\users\" />
   </ItemGroup>
 </Project>
