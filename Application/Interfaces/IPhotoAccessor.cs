@@ -1,4 +1,4 @@
-﻿using Application.Photots;
+﻿using Application.Photos;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;

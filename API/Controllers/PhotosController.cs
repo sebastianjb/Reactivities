@@ -1,4 +1,4 @@
-﻿using Application.Photots;
+﻿using Application.Photos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
