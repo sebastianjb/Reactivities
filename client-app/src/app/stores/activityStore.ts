@@ -9,7 +9,7 @@ export default class ActivityStore {
 
     activities: Activity[] = [];
     activityRegistry = new Map<string, Activity>();
-    selectedActivity: Activity | undefined = undefined;
+    selectedActivity?: Activity = undefined;
     editMode= false;
     loading = false;
     loadingInitial = false;
@@ -41,7 +41,7 @@ export default class ActivityStore {
             this.setLoadingInitial(true);
             try {
                 activity = await agent.Activities.details(id);
-                this.setActivity(activity);
+                this.setActivity(activity!);
                 runInAction(() => this.selectedActivity = activity);
                 
                 this.setLoadingInitial(false);
@@ -56,10 +56,10 @@ export default class ActivityStore {
     private getActivity = (id: string) => {
         return this.activityRegistry.get(id);
     }
-    private setActivity = (activity: Activity | undefined) => {
+    private setActivity = (activity: Activity) => {
         const user = store.userStore.user;
         if (user) {
-            activity!.isGoing = activity?.attendees!.some(
+            activity.isGoing = activity.attendees!.some(
                 a => a.username === user.username
             );
             activity!.isHost = activity!.hostUsername === user.username;
@@ -193,6 +193,17 @@ export default class ActivityStore {
 
     clearSelectedActivity = () => {
         this.selectedActivity = undefined;
+    }
+
+    updateAttendeeFollowing = (username: string) => {
+        this.activityRegistry.forEach(activity => {
+            activity.attendees.forEach(attendee => {
+                if (attendee.username === username) {
+                    attendee.following ? attendee.followersCount-- : attendee.followersCount++;
+                    attendee.following = !attendee.following;
+                }
+            })
+        })
     }
 
 }
