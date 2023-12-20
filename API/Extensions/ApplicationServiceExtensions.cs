@@ -5,8 +5,9 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Infrastructure.Photos;
 using Infrastructure.Security;
-using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Npgsql;
 using Persistence;
 
 namespace API.Extensions
@@ -16,11 +17,11 @@ namespace API.Extensions
 		public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config) {
 			services.AddEndpointsApiExplorer();
 			services.AddSwaggerGen();
-			var dbpath = Path.Join(Directory.GetCurrentDirectory(), "reactivities.db");
-			var conn = new SqliteConnection($"Data Source={dbpath}");
+
+			var constring = config.GetConnectionString("ReactivitiesAPI");
 			services.AddDbContext<DataContext>(opt =>
 			{
-				opt.UseSqlite(conn);
+				opt.UseNpgsql(constring);
 			});
 			services.AddCors(opt =>
 			{

@@ -177,7 +177,7 @@ export default class ProfileStore {
     loadActivities = async (username: string, predicate?: string) => {
         this.loadingActivities = true;
         try {
-            const userActivities = await agent.Profiles.listUserActivities(username, predicate);
+            const userActivities = await agent.Profiles.listUserActivities(username, predicate as string);
             runInAction(() => {
                 this.userActivities = userActivities;
                 this.loadingActivities = false;
